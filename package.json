@@ -1,0 +1,33 @@
+{
+  "name": "quoted-price-system-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run rmdir && babel src --out-dir dist",
+    "start": "node dist/app.js",
+    "rmdir": "node script/rmrf.js ./dist",
+    "watch": "node script/reload.js ./src",
+    "eslint": "eslint src --fix --ext .js"
+  },
+  "author": "Dalina Wang",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/router": "^10.0.0",
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
+    "mysql2": "^2.2.5",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.29"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-decorators": "^7.12.12",
+    "@babel/preset-env": "^7.12.11",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.22.0",
+    "nodemon": "^2.0.7"
+  }
+}
