@@ -17,7 +17,7 @@ class C {
 
     @Get('/test/dev')
     async hello(ctx) {
-        ctx.body = this.name;
+        ctx.success({age: 1});
     }
 }
 

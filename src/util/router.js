@@ -17,7 +17,6 @@ const files = fs.readdirSync(basePath)
     .map(item => {
         return path.join(basePath, item);
     });
-
 // 对controller进行 require, 以执行装饰器函数
 files.forEach(item => {
     // 此处 require 仅仅是为了执行一次代码
@@ -26,6 +25,7 @@ files.forEach(item => {
 
 // 实例化Controller Class, 绑定至methond, 构造koa-router对象
 const routerIns = new koaRouter();
+// console.log(controllerMap);
 controllerMap.forEach((value, key) => {
     const cIns = new key.constructor();
     value.forEach(props => {

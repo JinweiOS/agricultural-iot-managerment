@@ -12,6 +12,12 @@ const { init } = require('./loader/index');
 async function startApp() {
     // 挂在mysql
     // app.context.mysql = await createMysqlInstance();
+    app.use(async (ctx, next) => {
+        ctx.success = (resBody) => {
+            ctx.body = { success: true, data: resBody };
+        };
+        await next();
+    });
     app.use(
         koaBody({
             multipart: true,
@@ -26,7 +32,6 @@ async function startApp() {
     await init();
     app.use(router.routes());
     app.use(router.allowedMethods());
-
     app.listen(3000, console.log('请访问 http://localhost:3000 进行测试...'));
 }
 // 启动

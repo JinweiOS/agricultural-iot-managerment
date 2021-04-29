@@ -30,8 +30,9 @@ function methodFactory(method) {
             // 将同一class中的所有方法放置于数组中
             if (controllerMap.has(target)) {
                 controllerMap.get(target).push({ method, url, fn: descriptor.value });
+            } else {
+                controllerMap.set(target, [{ method, url, fn: descriptor.value }]);
             }
-            controllerMap.set(target, [{ method, url, fn: descriptor.value }]);
         };
     };
 }
