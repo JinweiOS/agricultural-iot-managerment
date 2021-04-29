@@ -4,12 +4,15 @@ const koaBody = require('koa-body');
 const path = require('path');
 const { router } = require('./util/router');
 const { init } = require('./loader/index');
+const cors = require('@koa/cors');
 
 
 /**
  * 由于orm框架挂载需要进行异步数据库操作，因此使用异步函数进行封装
  */
 async function startApp() {
+    // 跨域配置
+    app.use(cors());
     // 挂在mysql
     // app.context.mysql = await createMysqlInstance();
     app.use(async (ctx, next) => {
