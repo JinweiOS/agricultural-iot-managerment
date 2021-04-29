@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run rmdir && babel src --out-dir dist",
+    "dev": "npm run rmdir && babel src --out-dir dist --copy-files",
     "start": "node dist/app.js",
     "rmdir": "node script/rmrf.js ./dist",
     "watch": "node script/reload.js ./src",

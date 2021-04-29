@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
-const { Post } = require('../util/decorators');
+const { Post, Get } = require('../util/decorators');
 const { web3 } = require('../loader/index');
+const userContractAbiV1Json = require('../source/user-contract-abi-v1.0.json');
+const contractAddress = '0x68B2fA777951812e1f08DA808256DDD19e5C45A0';
 
 class AccountController {
     @Post('/account/unlock')
@@ -28,13 +30,49 @@ class AccountController {
 
     @Post('/account/registry')
     async accountRegistry(ctx) {
-        const params = ctx.request.body;
+        const address = ctx.request.header.address;
+        const { role, name, location, desc, reviewFileHref } = ctx.request.body;
         const date = new Date();
-        params.date = `${date.getTime()}`;
+        const checkInTime = `${date.getTime()}`;
         // TODO: 提交审核文件
-        ctx.success();
         // 调用智能合约存储用户信息
+        const abi = userContractAbiV1Json;
+        // 用户管理智能合约实例化
+        const contractIns = new web3.eth.Contract(abi, contractAddress);
+        const result = await contractIns.methods.inputUserInfo(address, parseInt(role), name, checkInTime, location, desc, reviewFileHref).send({ from: address });
+        ctx.success(result);
+    }
 
-        
+    @Get('/account/coin/get')
+    async coinGet(ctx) {
+        const result = await web3.eth.getBalance(ctx.request.header.address);
+        ctx.success(result);
+    }
+
+    @Get('/account/user/all')
+    async userAll(ctx) {
+        const abi = userContractAbiV1Json;
+        // 用户管理智能合约实例化
+        const contractIns = new web3.eth.Contract(abi, contractAddress);
+        const result = await contractIns.methods.getAllUserInfo().call();
+        ctx.success(result);
+    }
+
+    @Get('/account/user/now')
+    async userNow(ctx) {
+        const abi = userContractAbiV1Json;
+        const contractIns = new web3.eth.Contract(abi, contractAddress);
+        const result = await contractIns.methods.getUserInfo(ctx.request.header.address).call();
+        ctx.success(result);
+    }
+
+    @Get('/account/user/comfirm')
+    async userComfirm(ctx) {
+        const { address, role } = ctx.request.header;
+        const abi = userContractAbiV1Json;
+        const contractIns = new web3.eth.Contract(abi, contractAddress);
+        const result = await contractIns.methods.comfirmAdd(address, parseInt(role)).send({ from: address });
+        ctx.success(result);
     }
 }
+

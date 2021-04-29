@@ -6,7 +6,7 @@ const presets = [
             node: process.versions.node
         }
     }]
-]
+];
 // babel 插件配置
 const plugins = [
     ['@babel/plugin-proposal-decorators', {
@@ -15,10 +15,10 @@ const plugins = [
     ['@babel/plugin-proposal-class-properties', {
         loose: true
     }]
-]
+];
 
 const others = {
     sourceMaps: 'both'
-}
+};
 
-module.exports = { plugins, presets, ...others }
+module.exports = { plugins, presets, ...others };
