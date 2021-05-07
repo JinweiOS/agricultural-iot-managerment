@@ -16,8 +16,15 @@ async function startApp() {
     // 挂在mysql
     // app.context.mysql = await createMysqlInstance();
     app.use(async (ctx, next) => {
+        // 成功的返回值
         ctx.success = (resBody) => {
             ctx.body = { success: true, data: resBody };
+        };
+        ctx.file = (stream, fileName) => {
+            ctx.set({
+                'Content-Disposition': `attachment;filename=${fileName}`
+            });
+            ctx.body = stream;
         };
         await next();
     });

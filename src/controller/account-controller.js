@@ -3,6 +3,7 @@ const { Post, Get } = require('../util/decorators');
 const { web3 } = require('../loader/index');
 const userContractAbiV1Json = require('../source/user-contract-abi-v1.0.json');
 const contractAddress = '0x68B2fA777951812e1f08DA808256DDD19e5C45A0';
+const { Readable } = require('stream');
 
 class AccountController {
     @Post('/account/unlock')
@@ -15,16 +16,23 @@ class AccountController {
     @Post('/account/create')
     async accountCreate(ctx) {
         const { passwd } = ctx.request.body;
+        console.log(passwd);
         const resultTools = await web3.eth.accounts.create();
         // keystore 文件
         const keyStore = resultTools.encrypt(passwd);
         console.log(resultTools.privateKey);
         // 向节点中导入账户
-        await web3.eth.personal.importRawKey(resultTools.privateKey.substring(2), passwd);
+        // await web3.eth.personal.importRawKey(resultTools.privateKey.substring(2), passwd);
+        // ctx.success({
+        //     address: resultTools.address,
+        //     privateKey: resultTools.privateKey,
+        //     keyStore: keyStore
+        // });
         ctx.success({
             address: resultTools.address,
             privateKey: resultTools.privateKey,
-            keyStore: keyStore
+            keyStore: keyStore,
+            unlockPassword: passwd
         });
     }
 
