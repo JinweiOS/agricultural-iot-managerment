@@ -8,7 +8,8 @@
     "start": "node dist/app.js",
     "rmdir": "node script/rmrf.js ./dist",
     "watch": "node script/reload.js ./src",
-    "eslint": "eslint src --fix --ext .js"
+    "eslint": "eslint src --fix --ext .js",
+    "deploy:sol": "node sol/deploy.js"
   },
   "author": "Dalina Wang",
   "license": "ISC",

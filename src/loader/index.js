@@ -1,7 +1,7 @@
 import { createConnection } from 'typeorm';
 import { ormConfig } from '../config/index-conf';
 const Eth = require('web3');
-const web3 = new Eth('http://43.130.11.26:8545');
+const web3 = new Eth('http://127.0.0.1:8545');
 
 // commonjs 导出对象才能保持引用特性，避免值拷贝
 let mysql = { NULL: true };

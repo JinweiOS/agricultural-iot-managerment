@@ -5,63 +5,9 @@
 				"internalType": "address",
 				"name": "user",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "role",
-				"type": "uint256"
 			}
 		],
 		"name": "comfirmAdd",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "role",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "date",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "location",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "desc",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "reviewFileHref",
-				"type": "string"
-			}
-		],
-		"name": "inputUserInfo",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -114,9 +60,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "bool",
+						"internalType": "string",
 						"name": "review",
-						"type": "bool"
+						"type": "string"
 					},
 					{
 						"internalType": "uint256",
@@ -178,12 +124,66 @@
 				"type": "uint256"
 			},
 			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "role",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "date",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "location",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "desc",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "reviewFileHref",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "review",
+				"type": "string"
+			}
+		],
+		"name": "inputUserInfo",
+		"outputs": [
+			{
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
 			}
 		],
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
