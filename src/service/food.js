@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-const foodContractAddress = '0x4bfa233ae5480BC31c213f64F6641770D1386315';
+const {CTTAdress} = require('../config/index-conf.js');
+const foodContractAddress = CTTAdress.fs;
 const { web3 } = require('../loader');
 const foodContractAbi = require('../source/food-contract-abi.json');
 // const coinbaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';

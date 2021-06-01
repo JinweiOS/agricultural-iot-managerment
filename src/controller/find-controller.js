@@ -2,7 +2,8 @@
 const { Post, Get } = require('../util/decorators');
 const { web3 } = require('../loader/index');
 const exchangeContractAbi = require('../source/exchange-contract-abi-v1.0.json');
-const contractAddress = '0x04a958fFEd5f2364d24A4052B4FAA0EbA87CFA9f';
+const {CTTAdress} = require('../config/index-conf.js');
+const contractAddress = CTTAdress.ec;
 const coinbaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';
 const { Readable } = require('stream');
 

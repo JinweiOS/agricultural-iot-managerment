@@ -1,6 +1,7 @@
 const { web3 } = require('../loader/index');
 const userContractAbiV1Json = require('../source/user-contract-abi-v1.0.json');
-const contractAddress = '0xEC2097df4E35ad9A00FfAE695De4D357F05d01a8';
+const {CTTAdress} = require('../config/index-conf.js');
+const contractAddress = CTTAdress.us;
 //const coinbaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';
 
 // 获取以太坊用户个人信息

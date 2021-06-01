@@ -2,12 +2,16 @@ const coinBaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';
 const us = require('./bytecode/UserManager.json');
 const fs = require('./bytecode/FoodStore.json');
 const ec = require('./bytecode/Exchange.json');
+const fl = require('./bytecode/batchFlow.json');
+const buy = require('./bytecode/buy.json');
 const Eth = require('web3');
 const web3 = new Eth('http://127.0.0.1:8545');
 const solbcObj = {
     us: us.object,
     fs: fs.object,
-    ec: ec.object
+    ec: ec.object,
+    fl: fl.object,
+    buy: buy.object
 };
 
 
