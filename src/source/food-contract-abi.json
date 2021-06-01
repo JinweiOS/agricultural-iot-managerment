@@ -1,0 +1,262 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "foodIds",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "inputFoodOwnerInfo",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "user",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "foodId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "foodName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "images",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "advertiseSlogan",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "eatMethods",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "location",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "processFlow",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "storageCondition",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "afterSalesService",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "priceDescription",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "detailFoodFileHref",
+				"type": "string"
+			}
+		],
+		"name": "store",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllFoods",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "owner",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "foodName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "images",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "advertiseSlogan",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "eatMethods",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "location",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "processFlow",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "storageCondition",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "afterSalesService",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "priceDescription",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "detailFoodFileHref",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "foodId",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "exist",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct FoodStore.foodInfo[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "foodId",
+				"type": "string"
+			}
+		],
+		"name": "getFoodInfo",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "getOwerFoodInfo",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

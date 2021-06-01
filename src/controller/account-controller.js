@@ -2,7 +2,7 @@
 const { Post, Get } = require('../util/decorators');
 const { web3 } = require('../loader/index');
 const userContractAbiV1Json = require('../source/user-contract-abi-v1.0.json');
-const contractAddress = '0xa08da05519B9577F18C1543B10d859bCbDa291ED';
+const contractAddress = '0xEC2097df4E35ad9A00FfAE695De4D357F05d01a8';
 const coinbaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';
 const { Readable } = require('stream');
 
@@ -54,8 +54,6 @@ class AccountController {
     @Post('/account/registry')
     async accountRegistry(ctx) {
         const { address, passwd } = ctx.request.header;
-        await web3.eth.personal.unlockAccount(address, passwd, 6000000);
-        console.log(ctx.request.body);
         const { role, name, location, desc, reviewFileHref, review } = ctx.request.body;
         const date = new Date();
         const checkInTime = getTimeString();

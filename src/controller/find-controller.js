@@ -2,11 +2,13 @@
 const { Post, Get } = require('../util/decorators');
 const { web3 } = require('../loader/index');
 const exchangeContractAbi = require('../source/exchange-contract-abi-v1.0.json');
-const contractAddress = '0xf13ae0160A4Df60182D480Ef9BCFc38dE29E52bF';
+const contractAddress = '0x04a958fFEd5f2364d24A4052B4FAA0EbA87CFA9f';
 const coinbaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';
 const { Readable } = require('stream');
 
-const { getFoodInfoById, getUserInfoByAddress } = require('../service/user.js');
+const { getFoodInfoById } = require('../service/food');
+
+const { getUserInfoByAddress } = require('../service/user.js');
 
 class FindController {
 
@@ -14,11 +16,14 @@ class FindController {
     @Post('/exchange/batch')
     async batach(ctx) {
         const { batchId } = ctx.request.body;
+        console.log(batchId);
         // 产品交易信息合约实例化
         const exchangeCtIns = new web3.eth.Contract(exchangeContractAbi, contractAddress);
         const batchExchangeInfo = await exchangeCtIns.methods.getInfo(batchId).call();
+        //console.log(batchExchangeInfo);
         const batchInfoAfter = [];
-        for(let i = 0; i < batchExchangeInfo.length; i++) {
+        let foodIdGlobal = '';
+        for (let i = 0; i < batchExchangeInfo.length; i++) {
             const obj = {
                 from: batchExchangeInfo[i][0],
                 to: batchExchangeInfo[i][1],
@@ -26,26 +31,37 @@ class FindController {
                 foodId: batchExchangeInfo[i][3],
                 circulationFileHref: batchExchangeInfo[i][4]
             };
+            foodIdGlobal = batchExchangeInfo[i][3];
             const fromUserInfo = await getUserInfoByAddress(obj.from);
             const toUserInfo = await getUserInfoByAddress(obj.to);
             obj['fromName'] = fromUserInfo.name;
             obj['toName'] = toUserInfo.name;
             batchInfoAfter.push(obj);
         }
-        ctx.success(batchInfoAfter);
+        // console.log(batchInfoAfter);
+        // console.log(foodIdGlobal);
+        const foodDetail = await getFoodInfoById(foodIdGlobal);
+        ctx.success({ foodDetail, batchInfoAfter });
     }
 
-    async getFoodInfoById(foodId) {
-
+    getBatchId() {
+        const date = new Date();
+        return `B${date.getFullYear()}${date.getMonth() + 1}${date.getDay()}${date.getTime()}`;
     }
 
     // 录入某批次交易流转信息
     @Post('/exchange/input')
     async input(ctx) {
-        const { fromuser, touser, time, foodId, circulationFileHref, batchId } = ctx.request.body;
+        const { fromuser, touser, foodId, circulationFileHref } = ctx.request.body;
+        const batchId = this.getBatchId();
+        const time = this.getTimeString();
         const exchangeCtIns = new web3.eth.Contract(exchangeContractAbi, contractAddress);
         const batchExchangeInfo = await exchangeCtIns.methods.inputInfo(fromuser,
             touser, time, foodId, circulationFileHref, batchId).send({ from: coinbaseAccount });
-        ctx.success(ctx.request.body, '附加录入的批次流转信息');
+        ctx.success(Object.assign({ batch: batchId }, ctx.request.body), '附加录入的批次流转信息');
+    }
+    getTimeString() {
+        const date = new Date();
+        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay()}`;
     }
 }
