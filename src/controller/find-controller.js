@@ -54,7 +54,12 @@ class FindController {
     @Post('/exchange/input')
     async input(ctx) {
         const { fromuser, touser, foodId, circulationFileHref } = ctx.request.body;
-        const batchId = this.getBatchId();
+        let batchId = '';
+        if (ctx.request.body.batchId) {
+            batchId = ctx.request.body.batchId;
+        } else {
+            batchId = this.getBatchId();
+        }
         const time = this.getTimeString();
         const exchangeCtIns = new web3.eth.Contract(exchangeContractAbi, contractAddress);
         const batchExchangeInfo = await exchangeCtIns.methods.inputInfo(fromuser,

@@ -5,6 +5,7 @@ const { web3 } = require('../loader/index');
 const { CTTAdress } = require('../config/index-conf');
 const buyCtAddress = CTTAdress.buy;
 const coinbaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';
+const {getFl, setFl} = require('../service/fl');
 
 
 class BuyController {
@@ -67,7 +68,20 @@ class BuyController {
         const buyIns = new web3.eth.Contract(buyAbi, buyCtAddress);
         const res = await buyIns.methods.setState(msgId).send({from:coinbaseAccount});
         ctx.success(ctx.request.body);
-        // TODO: 绑定批次信息
-        // TODO: 修改食品拥有关系
+    }
+
+    @Post('/fl/input')
+    async input(ctx) {
+        const {address,foodId, batchId} = ctx.request.body;
+        const addressFoodId = address + foodId;
+        await setFl(addressFoodId, batchId);
+        ctx.success(ctx.request.body);
+    }
+
+    @Post('/fl/get')
+    async flGet(ctx) {
+        const {af} = ctx.request.body;
+        const batchId = await getFl(af);
+        ctx.success(batchId);
     }
 }

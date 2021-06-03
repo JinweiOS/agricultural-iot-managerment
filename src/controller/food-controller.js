@@ -8,6 +8,19 @@ const {CTTAdress} = require('../config/index-conf.js');
 const foodContractAddress = CTTAdress.fs;
 
 class FoodController {
+
+    @Post('/food/input/owner')
+    async ownerInput(ctx) {
+        const {foodId, address} = ctx.request.body;
+        const foodCtIns = new web3.eth.Contract(foodContractAbi, foodContractAddress);
+        let res = await foodCtIns.methods.getOwerFoodInfo(address).call();
+        if (res !== '') {
+            res = res + `,${foodId}`;
+        }
+        await foodCtIns.methods.inputFoodOwnerInfo(res, address).send({ from: coinbaseAccount });
+        ctx.success(ctx.request.body);
+    }
+
     @Post('/food/input')
     async input(ctx) {
         const { owner, foodName, image, advertiseSlogan, eatMethods, location, processFlow, storageCondition, afterSalesService, priceDescription, detailFoodFileHref } = ctx.request.body;
@@ -86,5 +99,10 @@ class FoodController {
             afterSalesServic: res['10'],
         };
         ctx.success(obj);
+    }
+
+    @Post('/file/upload')
+    async upload(ctx) {
+        ctx.success(ctx.request.files);
     }
 }
