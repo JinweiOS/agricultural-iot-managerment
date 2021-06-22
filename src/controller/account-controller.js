@@ -4,7 +4,7 @@ const { web3 } = require('../loader/index');
 const userContractAbiV1Json = require('../source/user-contract-abi-v1.0.json');
 const {CTTAdress} = require('../config/index-conf.js');
 const contractAddress = CTTAdress.us;
-const coinbaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';
+const coinbaseAccount = CTTAdress.coinbaseAddress;
 const { Readable } = require('stream');
 
 class AccountController {
@@ -12,6 +12,7 @@ class AccountController {
     async accountUnlock(ctx) {
         console.log('tttt');
         const { address, passwd } = ctx.request.body;
+        console.log(address, passwd);
         const result = await web3.eth.personal.unlockAccount(address, passwd, 600000000);
         ctx.success(result);
     }
@@ -24,11 +25,7 @@ class AccountController {
         console.log(resultTools.privateKey);
         // 向节点中导入账户
         await web3.eth.personal.importRawKey(resultTools.privateKey.substring(2), passwd);
-        ctx.success({
-            address: resultTools.address,
-            privateKey: resultTools.privateKey,
-            keyStore: keyStore
-        });
+
 
         // 初始化账户金额数据
         await initCoinBalance(resultTools.address);

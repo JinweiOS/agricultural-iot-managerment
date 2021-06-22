@@ -4,7 +4,7 @@ const buyAbi = require('../source/buy-contract-abi.json');
 const { web3 } = require('../loader/index');
 const { CTTAdress } = require('../config/index-conf');
 const buyCtAddress = CTTAdress.buy;
-const coinbaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';
+const coinbaseAccount = CTTAdress.coinbaseAddress;
 const {getFl, setFl} = require('../service/fl');
 
 
@@ -73,6 +73,7 @@ class BuyController {
     @Post('/fl/input')
     async input(ctx) {
         const {address,foodId, batchId} = ctx.request.body;
+        console.log(ctx.request.body);
         const addressFoodId = address + foodId;
         await setFl(addressFoodId, batchId);
         ctx.success(ctx.request.body);

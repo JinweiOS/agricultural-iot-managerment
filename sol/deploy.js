@@ -1,4 +1,5 @@
-const coinBaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';
+const {CTTAdress} = require('../src/config/index-conf');
+const coinBaseAccount = CTTAdress.coinbaseAddress;
 const us = require('./bytecode/UserManager.json');
 const fs = require('./bytecode/FoodStore.json');
 const ec = require('./bytecode/Exchange.json');

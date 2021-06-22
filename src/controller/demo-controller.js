@@ -11,12 +11,13 @@ class C {
 
     @Get('/')
     async method(ctx) {
+        console.log(ctx);
         this.name;
         const { appId } = ctx.query;
-        ctx.success(ctx.request.header);
+        ctx.body = appId;
     }
 
-    @Get('/test/coin')
+    @Get('/test/coin') 
     async hello(ctx) {
         await web3.eth.personal.unlockAccount('0xebf844ec4e67d5007051dacca8530b53179244e0', '1', 6000000);
         const result = await web3.eth.sendTransaction({

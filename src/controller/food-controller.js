@@ -2,10 +2,11 @@
 const { web3 } = require('../loader');
 const foodContractAbi = require('../source/food-contract-abi.json');
 const { Post, Get } = require('../util/decorators');
-const coinbaseAccount = '0x34a1fee1c9bafc030e123cc85554f29318535c81';
+
 
 const {CTTAdress} = require('../config/index-conf.js');
 const foodContractAddress = CTTAdress.fs;
+const coinbaseAccount = CTTAdress.coinbaseAddress;
 
 class FoodController {
 
@@ -26,6 +27,7 @@ class FoodController {
         const { owner, foodName, image, advertiseSlogan, eatMethods, location, processFlow, storageCondition, afterSalesService, priceDescription, detailFoodFileHref } = ctx.request.body;
         console.log(ctx.request.body);
 
+        console.log(coinbaseAccount);
         // 生成foodId
         const foodId = this.getFoodId();
         const foodCtIns = new web3.eth.Contract(foodContractAbi, foodContractAddress);
